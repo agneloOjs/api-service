@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "esbenp.prettier-vscode",
     "prisma.prisma",
     "mgmcdermott.vscode-language-babel",
     "dracula-theme.theme-dracula",
