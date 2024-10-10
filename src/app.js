@@ -37,7 +37,7 @@ class App {
   }
 
   routes() {
-    this.app.use('/api', routes);
+    this.app.use('/api-service', routes);
 
     // Tratamento para rotas não encontradas.
     this.app.use('*', (req, res) => {
