@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "prisma.prisma",
+    "mgmcdermott.vscode-language-babel",
+    "dracula-theme.theme-dracula",
+    "xabikos.javascriptsnippets",
+    "ionutvmi.path-autocomplete",
+    "dbaeumer.vscode-eslint",
+    "pkief.material-icon-theme",
+    "codedependant.generate-jest-mocks",
+    "ms-vscode-remote.remote-wsl",
+    "irongeek.vscode-env"
+  ]
+}
