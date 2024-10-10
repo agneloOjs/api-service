@@ -32,5 +32,5 @@ model Company {
   createdBy                   String?
   
   @@index([cnpj, email])
-  @@map("Companys")
+  @@map("Companies")
 }
