@@ -11,7 +11,7 @@ import { ERROR_MESSAGES } from './constants/ErrorMessages.js';
 class Server {
   constructor() {
     this.port = process.env.PORT || 8000;
-    this.process.env.CORS_ORIGIN;
+    this.url = process.env.CORS_ORIGIN;
   }
 
   /**
