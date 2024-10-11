@@ -27,6 +27,7 @@ model Company {
   fiscalResponsibleName       String?
   fiscalResponsibleCpf        String? 
   hasDigitalCertificate       Boolean?
+  validatedDigitalCertificate DateTime?
   regularizationProcessNumber String?
   fiscalObservations          String?
   createdBy                   String?
