@@ -8,7 +8,7 @@ describe('CompanyInputFactory', () => {
       id: 1,
       corporateReason: 'Empresa Exemplo Ltda',
       cnpj: '12.345.678/0001-99',
-      status: 'Ativo',
+      status: true,
       blocked: false
     };
 
@@ -18,7 +18,7 @@ describe('CompanyInputFactory', () => {
     expect(companyDTO.id).toBe(1);
     expect(companyDTO.corporateReason).toBe('Empresa Exemplo Ltda');
     expect(companyDTO.cnpj).toBe('12.345.678/0001-99');
-    expect(companyDTO.status).toBe('Ativo');
+    expect(companyDTO.status).toBe(true);
     expect(companyDTO.blocked).toBe(false);
   });
 
