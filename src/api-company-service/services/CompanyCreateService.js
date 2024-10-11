@@ -1,7 +1,8 @@
 import CompanyCreateRepository from '../repositories/CompanyCreate.js';
-import CompanyInputFectory from '../factories/CompanyInputFactory.js';
+import CompanyInputFactory from '../factories/CompanyInputFactory.js';
 import Logger from '../../constants/Logger.js';
 import { ERROR_MESSAGES } from '../../constants/ErrorMessages.js';
+import CompanyCreateSanitizeData from '../utils/sanitize/CompanyCreateSinetizeData.js';
 
 export default class CompanyCreateService {
   constructor() {
@@ -10,8 +11,11 @@ export default class CompanyCreateService {
 
   async createCompany(companyData) {
     try {
+      // Sanitizar os dados da empresa para garantir que apenas os campos permitidos sejam aceitos
+      const sanitizedData = CompanyCreateSanitizeData(companyData);
+
       const CompanyCreate = await this.companyCreateRepository.create({
-        ...companyData,
+        ...sanitizedData,
         status: true,
         blocked: false
       });
@@ -19,7 +23,7 @@ export default class CompanyCreateService {
       return {
         success: true,
         message: `${ERROR_MESSAGES.COMPANY_CREATED}`,
-        company: CompanyInputFectory.companyInputDTO(CompanyCreate)
+        company: CompanyInputFactory.companyInputDTO(CompanyCreate)
       };
     } catch (error) {
       Logger.error(error);
