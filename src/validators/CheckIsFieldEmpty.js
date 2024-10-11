@@ -1,4 +1,4 @@
-import { INVALID_OR_EMPTY_MESSAGES } from '../constants/ErrorMessages.js';
+import { INVALID_OR_EMPTY_MESSAGES_BR } from '../I18n/pt-BR/message/ErrorFieldInvalidBR.js';
 
 /**
  * Verifica se um campo está vazio.
@@ -10,7 +10,7 @@ export function CheckIsFieldEmpty(field, fieldName) {
   const sanitizedField = field ? field.trim() : '';
 
   if (!sanitizedField) {
-    return `${fieldName} ${INVALID_OR_EMPTY_MESSAGES.NOT_EMPTY_FIELD}`;
+    return `${fieldName} ${INVALID_OR_EMPTY_MESSAGES_BR.NOT_EMPTY_FIELD}`;
   }
 
   return true;
