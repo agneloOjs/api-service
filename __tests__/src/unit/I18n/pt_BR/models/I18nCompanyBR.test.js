@@ -1,8 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { I18nCompanyBR } from '../../../../../../src/I18n/pt-BR/models/I18nCompanyBR.js';
+import {
+  I18nCompanyBR,
+  ERROR_COMPANY,
+  SUCCESS_COMPANY
+} from '../../../../../../src/I18n/pt-BR/models/I18nCompanyBR.js';
 
 describe('I18nCompanyBR', () => {
-  it('deve conter todas as chaves necessárias', () => {
+  it('deve ter todas as chaves definidas', () => {
     const expectedKeys = [
       'companyCnpj',
       'companyEmail',
@@ -68,5 +72,22 @@ describe('I18nCompanyBR', () => {
     expect(I18nCompanyBR.companyBlocked).toBe('Bloqueado');
     expect(I18nCompanyBR.companyStatus).toBe('Status');
     expect(I18nCompanyBR.companyCnae).toBe('CNAE');
+  });
+});
+
+describe('ERROR_COMPANY', () => {
+  it('deve ter mensagens de erro corretas', () => {
+    expect(ERROR_COMPANY.NOT_FOUND).toBe('Empresa não encontrada.');
+    expect(ERROR_COMPANY.DOES_NOT_EXIST).toBe('A empresa não existe.');
+    expect(ERROR_COMPANY.NOT_FOUND_ALL).toBe('Erro ao listar empresas.');
+    expect(ERROR_COMPANY.ERROR_CREATED).toBe('Erro ao cadastrar empresa.');
+  });
+});
+
+describe('SUCCESS_COMPANY', () => {
+  it('deve ter mensagens de sucesso corretas', () => {
+    expect(SUCCESS_COMPANY.CREATED_OK).toBe('Empresa cadastrada com sucesso.');
+    expect(SUCCESS_COMPANY.LIST_ALL).toBe('Empresas listadas com sucesso.');
+    expect(SUCCESS_COMPANY.LIST_UNIQUE).toBe('Empresa listada com sucesso.');
   });
 });

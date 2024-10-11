@@ -25,3 +25,16 @@ export const I18nCompanyBR = {
   companyStatus: 'Status',
   companyCnae: 'CNAE'
 };
+
+export const ERROR_COMPANY = {
+  NOT_FOUND: 'Empresa não encontrada.',
+  DOES_NOT_EXIST: 'A empresa não existe.',
+  NOT_FOUND_ALL: 'Erro ao listar empresas.',
+  ERROR_CREATED: 'Erro ao cadastrar empresa.'
+};
+
+export const SUCCESS_COMPANY = {
+  CREATED_OK: 'Empresa cadastrada com sucesso.',
+  LIST_ALL: 'Empresas listadas com sucesso.',
+  LIST_UNIQUE: 'Empresa listada com sucesso.'
+};
