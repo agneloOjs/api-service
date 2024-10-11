@@ -3,7 +3,7 @@
  * @module routes/private
  */
 import { Router } from 'express';
-import CompanyPrivateRoutes from '../api-company-service/routes/CompanyPrivate.routes.js';
+import CompanyPrivateRoutes from './company/CompanyPrivate.routes.js';
 
 const privateRoutes = Router();
 

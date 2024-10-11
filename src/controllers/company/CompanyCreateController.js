@@ -1,5 +1,5 @@
 import Logger from '../../constants/Logger.js';
-import CompanyCreateService from '../services/CompanyCreateService.js';
+import CompanyCreateService from '../../services/company/CompanyCreateService.js';
 import { ERROR_MESSAGES } from '../../constants/ErrorMessages.js';
 
 export default class CompanyCreateController {

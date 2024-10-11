@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import CompanyCreateController from '../controllers/CompanyCreateController.js';
+import CompanyCreateController from '../../controllers/company/CompanyCreateController.js';
 
 const CompanyPrivateRoutes = Router();
 

@@ -14,7 +14,7 @@ export const ERROR_MESSAGES = {
 export const INVALID_OR_EMPTY_MESSAGES = {
   INVALID_EMAIL: 'E-mail inválido.',
   NOT_EMPTY_FIELD: 'não pode estar vazio.',
-  NO_SPECIAL_CHARACTERS: 'Não pode conter caracteres especiais.'
+  NO_SPECIAL_CHARACTERS: 'não pode conter caracteres especiais.'
 };
 
 export const SUCCESS_MESSAGES = {
