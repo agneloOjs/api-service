@@ -19,6 +19,7 @@ CREATE TABLE "Companies" (
     "fiscalResponsibleName" TEXT,
     "fiscalResponsibleCpf" TEXT,
     "hasDigitalCertificate" BOOLEAN,
+    "validatedDigitalCertificate" TIMESTAMP(3),
     "regularizationProcessNumber" TEXT,
     "fiscalObservations" TEXT,
     "createdBy" TEXT,
