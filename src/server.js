@@ -6,7 +6,7 @@
 import 'dotenv/config';
 import app from './app.js';
 import { connectDb } from './config/dbService.js';
-import { ERROR_MESSAGES_BR } from './I18n/pt-BR/message/ErrorMessagesBR.js';
+import { ERROR_MESSAGES_BR } from './shared/I18n/pt-BR/ErrorMessagesBR.js';
 
 class Server {
   constructor() {

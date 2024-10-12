@@ -1,13 +1,11 @@
-import CompanyCreateRepository from '../../repositories/company/CompanyCreate.js';
+import CompanyCreateRepository from '../repositories/CompanyCreate.js';
 import CompanyInputFectory from '../factories/CompanyInputFactory.js';
 import CompanyCreateSanitizeData from '../utils/CompanyCreateSinetizeData.js';
-import { CompanyCreateSchema } from '../validators/schemas/company/CompanyCreateSchema.js';
+import Logger from '../../shared/utils/Logger.js';
 import {
   ERROR_COMPANY,
   SUCCESS_COMPANY
 } from '../I18n/pt-BR/models/I18nCompanyBR.js';
-import Logger from '../../constants/Logger.js';
-import { ERROR_MESSAGES_BR } from '../I18n/pt-BR/message/ErrorMessagesBR.js';
 
 export default class CompanyCreateService {
   constructor() {
@@ -16,17 +14,6 @@ export default class CompanyCreateService {
 
   async createCompany(companyData) {
     try {
-      // Valida o campo corporateReason antes de prosseguir
-      const validationError = CompanyCreateSchema(
-        companyData.corporateReason,
-        companyData.cnpj
-      );
-      if (validationError !== true) {
-        return {
-          success: false,
-          message: validationError // Retorna a mensagem de erro da validação
-        };
-      }
       // Sanitizar os dados da empresa para garantir que apenas os campos permitidos sejam aceitos
       const sanitizedData = CompanyCreateSanitizeData(companyData);
 

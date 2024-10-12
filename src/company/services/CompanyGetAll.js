@@ -1,10 +1,10 @@
-import CompanyGetAllRepository from '../../repositories/company/CompanyGetAll.js';
+import CompanyGetAllRepository from '../repositories/CompanyGetAll.js';
 import CompanyReqFactory from '../factories/CompanyReqFectory.js';
 import Logger from '../../shared/utils/Logger.js';
 import {
   ERROR_COMPANY,
   SUCCESS_COMPANY
-} from '../../../shared/I18n/pt-BR/models/I18nCompanyBR.js';
+} from '../I18n/pt-BR/models/I18nCompanyBR.js';
 
 export default class CompanyGetAllService {
   constructor() {
@@ -17,7 +17,7 @@ export default class CompanyGetAllService {
       return {
         success: true,
         message: `${SUCCESS_COMPANY.LIST_ALL}`,
-        company: CompanyReqFactory.companyReqDTO(companies)
+        company: CompanyReqFactory.companyResDTO(companies)
       };
     } catch (error) {
       Logger.error(error);

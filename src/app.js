@@ -7,7 +7,7 @@ import express from 'express';
 import cors from 'cors';
 import { env } from './config/env.js';
 import routes from './routes/base.routes.js';
-import { ERROR_MESSAGES_BR } from './I18n/pt-BR/message/ErrorMessagesBR.js';
+import { ERROR_MESSAGES_BR } from './shared/I18n/pt-BR/ErrorMessagesBR.js';
 
 class App {
   constructor() {
