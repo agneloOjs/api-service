@@ -8,30 +8,34 @@ datasource db {
 }
 
 model Company {
-  id                          String      @id @unique @default(uuid()) @db.Uuid
-  createdAt                   DateTime    @default(now()) @db.Timestamp(6)
-  updatedAt                   DateTime    @updatedAt @db.Timestamp(6)
-  email                       String?     @unique @db.VarChar(128)
-  corporateReason             String?     @unique @db.VarChar(128)
-  fantasyName                 String?     @unique @db.VarChar(128)
-  cnpj                        String      @unique
-  stateRegistration           String? 
-  municipalRegistration       String? 
-  taxationRegime              String?
-  operatingLicense            String?
+  id                          String    @id @unique @default(uuid()) @db.Uuid
+  createdAt                   DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt                   DateTime  @updatedAt @db.Timestamp(6)
+  email                       String?   @unique @db.VarChar(128)
+  corporateReason             String?   @unique @db.VarChar(128)
+  fantasyName                 String?   @unique @db.VarChar(128)
+  cnpj                        String    @unique @db.VarChar(18)
+  stateRegistration           String?   @db.VarChar(9)
+  municipalRegistration       String?   @db.VarChar(14)
+  nire                        String?   @db.VarChar(11)
+  taxationRegime              String?   @db.VarChar(80)
+  operatingLicense            String?   @db.VarChar(255)
   licenseValidity             DateTime?
   openingDate                 DateTime?
-  blocked                     Boolean      @default(false)
-  status                      Boolean      @default(true)
-  cnae                        String?
-  fiscalResponsibleName       String?
-  fiscalResponsibleCpf        String? 
+  blocked                     Boolean   @default(false)
+  status                      Boolean   @default(true)
+  mainCnae                    String?   @db.VarChar(7)
+  secondaryCnae               String?   @db.VarChar(7)
+  fiscalResponsibleName       String?   @db.VarChar(80)
+  fiscalResponsibleCpf        String?   @db.VarChar(14)
+  fiscalResponsibleRne        String?   @db.VarChar(10)
   hasDigitalCertificate       Boolean?
+  digitalCertificate          String?   @db.VarChar(255)
   validatedDigitalCertificate DateTime?
-  regularizationProcessNumber String?
-  fiscalObservations          String?
-  createdBy                   String?
-  
+  regularizationProcessNumber String?   @db.VarChar(28)
+  fiscalObservations          String?   @db.Text
+  createdBy                   String?   @db.VarChar(128)
+
   @@index([cnpj, email])
   @@map("Companies")
 }
