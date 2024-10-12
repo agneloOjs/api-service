@@ -1,4 +1,4 @@
-import CompanyReqDTO from '../../dtos/company/CompanyReqDTO.js';
+import CompanyReqDTO from '../dtos/CompanyReqDTO.js';
 
 export default class CompanyReqFactory {
   static companyReqDTO(companies) {

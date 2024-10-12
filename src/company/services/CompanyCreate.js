@@ -1,13 +1,13 @@
 import CompanyCreateRepository from '../../repositories/company/CompanyCreate.js';
-import CompanyInputFectory from '../../factories/company/CompanyInputFactory.js';
-import CompanyCreateSanitizeData from '../../utils/company/CompanyCreateSinetizeData.js';
-import { CompanyCreateSchema } from '../../validators/schemas/company/CompanyCreateSchema.js';
+import CompanyInputFectory from '../factories/CompanyInputFactory.js';
+import CompanyCreateSanitizeData from '../utils/CompanyCreateSinetizeData.js';
+import { CompanyCreateSchema } from '../validators/schemas/company/CompanyCreateSchema.js';
 import {
   ERROR_COMPANY,
   SUCCESS_COMPANY
-} from '../../I18n/pt-BR/models/I18nCompanyBR.js';
+} from '../I18n/pt-BR/models/I18nCompanyBR.js';
 import Logger from '../../constants/Logger.js';
-import { ERROR_MESSAGES_BR } from '../../I18n/pt-BR/message/ErrorMessagesBR.js';
+import { ERROR_MESSAGES_BR } from '../I18n/pt-BR/message/ErrorMessagesBR.js';
 
 export default class CompanyCreateService {
   constructor() {

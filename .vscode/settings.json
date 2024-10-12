@@ -4,6 +4,7 @@
   "files.autoSave": "onFocusChange",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.validate": ["javascript", "javascriptreact", "typescript"],
+  "editor.lineNumbers": "on",
 
   "workbench.editor.highlightModifiedTabs": true,
   "editor.bracketPairColorization.enabled": true,
@@ -15,8 +16,10 @@
   "editor.minimap.enabled": false,
   "editor.formatOnSave": true,
   "explorer.autoReveal": true,
+  "git.autorefresh": true,
+  "git.enabled": true,
 
-  "workbench.tree.indent": 20,
+  "workbench.tree.indent": 25,
   "editor.lineHeight": 1.7,
   "editor.fontSize": 16,
   "editor.tabSize": 2

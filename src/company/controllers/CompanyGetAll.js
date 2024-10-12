@@ -1,6 +1,6 @@
-import CompanyGetAllService from '../../services/company/CompanyGetAll.js';
-import { ERROR_MESSAGES_BR } from '../../I18n/pt-BR/message/ErrorMessagesBR.js';
-import Logger from '../../constants/Logger.js';
+import CompanyGetAllService from '../services/CompanyGetAll.js';
+import { ERROR_MESSAGES_BR } from '../I18n/pt-BR/message/ErrorMessagesBR.js';
+import Logger from '../../shared/utils/Logger.js';
 
 export default class CompanyGetAllController {
   constructor() {

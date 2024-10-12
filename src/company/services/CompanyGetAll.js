@@ -1,10 +1,10 @@
 import CompanyGetAllRepository from '../../repositories/company/CompanyGetAll.js';
-import CompanyReqFactory from '../../factories/company/CompanyReqFectory.js';
-import Logger from '../../constants/Logger.js';
+import CompanyReqFactory from '../factories/CompanyReqFectory.js';
+import Logger from '../../shared/utils/Logger.js';
 import {
   ERROR_COMPANY,
   SUCCESS_COMPANY
-} from '../../I18n/pt-BR/models/I18nCompanyBR.js';
+} from '../../../shared/I18n/pt-BR/models/I18nCompanyBR.js';
 
 export default class CompanyGetAllService {
   constructor() {
