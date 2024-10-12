@@ -6,7 +6,7 @@
 import 'dotenv/config';
 import app from './app.js';
 import { connectDb } from './config/dbService.js';
-import { ERROR_MESSAGES } from './constants/ErrorMessages.js';
+import { ERROR_MESSAGES_BR } from './I18n/pt-BR/message/ErrorMessagesBR.js';
 
 class Server {
   constructor() {
@@ -29,7 +29,7 @@ class Server {
         console.log(`Data/Hora: ${new Date().toDateString()}`);
       });
     } catch (error) {
-      console.error(`${ERROR_MESSAGES.ERROR_WHEN_STARTING_SERVER}`);
+      console.error(`${ERROR_MESSAGES_BR.ERROR_WHEN_STARTING_SERVER}`);
       process.exit(1);
     }
   }

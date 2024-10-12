@@ -38,3 +38,8 @@ export const SUCCESS_COMPANY = {
   LIST_ALL: 'Empresas listadas com sucesso.',
   LIST_UNIQUE: 'Empresa listada com sucesso.'
 };
+
+export const VALIDATE_INPUT_DATA_COMPANY = {
+  CNPJ_LENGTH: 'CNPJ deve ter 14 dígitos.',
+  CNPJ_INVALID: 'CNPJ inválido.'
+};

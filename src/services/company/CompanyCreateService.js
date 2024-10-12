@@ -1,9 +1,9 @@
 import CompanyCreateRepository from '../../repositories/company/CompanyCreate.js';
 import CompanyInputFectory from '../../factories/company/CompanyInputFactory.js';
 import CompanyCreateSanitizeData from '../../utils/company/CompanyCreateSinetizeData.js';
-import { ERROR_MESSAGES } from '../../constants/ErrorMessages.js';
-import Logger from '../../constants/Logger.js';
 import { CompanyCreateSchema } from '../../validators/schemas/company/CompanyCreateSchema.js';
+import { SUCCESS_COMPANY } from '../../I18n/pt-BR/models/I18nCompanyBR.js';
+import Logger from '../../constants/Logger.js';
 
 export default class CompanyCreateService {
   constructor() {
@@ -31,7 +31,7 @@ export default class CompanyCreateService {
 
       return {
         success: true,
-        message: `${ERROR_MESSAGES.COMPANY_CREATED}`,
+        message: `${SUCCESS_COMPANY.CREATED_OK}`,
         company: CompanyInputFectory.companyInputDTO(CompanyCreate)
       };
     } catch (error) {
