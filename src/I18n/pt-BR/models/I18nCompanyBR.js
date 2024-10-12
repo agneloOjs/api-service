@@ -34,12 +34,13 @@ export const ERROR_COMPANY = {
 };
 
 export const SUCCESS_COMPANY = {
-  CREATED_OK: 'Empresa cadastrada com sucesso.',
   LIST_ALL: 'Empresas listadas com sucesso.',
-  LIST_UNIQUE: 'Empresa listada com sucesso.'
+  LIST_UNIQUE: 'Empresa listada com sucesso.',
+  CREATED_OK: 'Empresa cadastrada com sucesso.'
 };
 
 export const VALIDATE_INPUT_DATA_COMPANY = {
+  CNPJ_INVALID: 'CNPJ inválido.',
   CNPJ_LENGTH: 'CNPJ deve ter 14 dígitos.',
-  CNPJ_INVALID: 'CNPJ inválido.'
+  CNPJ_FIRST_DIGIT: 'CNPJ primeiro dígito é inválido.'
 };

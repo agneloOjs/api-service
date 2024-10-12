@@ -1,4 +1,4 @@
-import CompanyCreateService from '../../services/company/CompanyCreateService.js';
+import CompanyCreateService from '../../services/company/CompanyCreate.js';
 import { ERROR_MESSAGES_BR } from '../../I18n/pt-BR/message/ErrorMessagesBR.js';
 import Logger from '../../constants/Logger.js';
 
