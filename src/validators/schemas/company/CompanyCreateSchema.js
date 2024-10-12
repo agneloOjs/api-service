@@ -1,22 +1,8 @@
 import { I18nCompanyBR } from '../../../I18n/pt-BR/models/I18nCompanyBR.js';
+import { CheckInputSafety } from '../../CheckInputSafety.js';
 import { CheckIsFieldEmpty } from '../../CheckIsFieldEmpty.js';
 import { CheckNoSpecialCharacters } from '../../CheckNoSpecialCharacters.js';
-
-/**
- * Verifica se uma string contém caracteres potencialmente perigosos.
- * @param {string} str
- * @param {string} fieldName
- * @returns {boolean|string}
- */
-export function CheckInputSafety(str, fieldName) {
-  const unsafeRegex = /[<>\\/\[\]{}();'"$%&+=*|`~]/;
-
-  if (unsafeRegex.test(str)) {
-    return `${fieldName} contém caracteres potencialmente perigosos.`;
-  }
-
-  return true; // Retorna true se a string for segura
-}
+import { CompanyValidateCNPJ } from './data/CompanyCNPJ.js';
 
 /**
  * Valida o campo corporateReason.
@@ -52,6 +38,12 @@ export function CompanyCreateSchema(corporateReason) {
   );
   if (safetyCheck !== true) {
     return safetyCheck;
+  }
+
+  // Validação: Verifica o CNPJ
+  const cnpjValidation = CompanyValidateCNPJ(cnpj);
+  if (cnpjValidation !== true) {
+    return cnpjValidation;
   }
 
   return true;

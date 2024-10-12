@@ -7,7 +7,7 @@ import express from 'express';
 import cors from 'cors';
 import { env } from './config/env.js';
 import routes from './routes/base.routes.js';
-import { ERROR_MESSAGES } from './constants/ErrorMessages.js';
+import { ERROR_MESSAGES_BR } from './I18n/pt-BR/message/ErrorMessagesBR.js';
 
 class App {
   constructor() {
@@ -52,7 +52,7 @@ class App {
       console.error(err);
       res.status(err.status || 500).json({
         status: 'error',
-        message: err.message || `${ERROR_MESSAGES.INTERNAL_SERVER_ERROR}`
+        message: err.message || `${ERROR_MESSAGES_BR.INTERNAL_SERVER_ERROR}`
       });
       next();
     });
