@@ -15,4 +15,4 @@ logs
 .env.*
 !.env.example
 
-script.text
+script/

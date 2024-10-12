@@ -7,3 +7,8 @@
 # 2. **test**
 
     $ npm run test
+
+# vitest
+
+$ npx vitest run --reporter verbose
+$ npx vitest

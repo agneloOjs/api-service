@@ -1,4 +1,17 @@
+/**
+ * Classe Data Transfer Object (DTO) para entrada de dados da empresa.
+ */
 export default class CompanyInputDTO {
+  /**
+   * Cria uma instância de CompanyInputDTO.
+   *
+   * @param {Object} company
+   * @param {string} company.id
+   * @param {string} company.corporateReason
+   * @param {string} company.cnpj
+   * @param {boolean} company.status
+   * @param {boolean} company.blocked
+   */
   constructor(company) {
     this.id = company.id;
     this.corporateReason = company.corporateReason;

@@ -30,7 +30,8 @@ export const ERROR_COMPANY = {
   NOT_FOUND: 'Empresa não encontrada.',
   DOES_NOT_EXIST: 'A empresa não existe.',
   NOT_FOUND_ALL: 'Erro ao listar empresas.',
-  ERROR_CREATED: 'Erro ao cadastrar empresa.'
+  ERROR_CREATED: 'Erro ao cadastrar empresa.',
+  CNPJ_ALREADY_EXISTS: 'CNPJ já cadastrado.'
 };
 
 export const SUCCESS_COMPANY = {
