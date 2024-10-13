@@ -1,4 +1,4 @@
-import { VALIDATE_INPUT_DATA_COMPANY } from '../../../I18n/pt-BR/models/I18nCompanyBR.js';
+import { VALIDATE_INPUT_DATA_COMPANY } from '../../../../I18n/pt-BR/models/I18nCompanyBR.js';
 
 export const CompanyValidateCNPJ = (cnpj) => {
   // Remove caracteres não numéricos

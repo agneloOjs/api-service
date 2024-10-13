@@ -8,6 +8,7 @@
     "dbaeumer.vscode-eslint",
     "pkief.material-icon-theme",
     "ms-vscode-remote.remote-wsl",
-    "irongeek.vscode-env"
+    "irongeek.vscode-env",
+    "prisma.prisma-insider"
   ]
 }

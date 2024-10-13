@@ -2,6 +2,7 @@ import CompanyCreateRepository from '../repositories/CompanyCreate.js';
 import CompanyInputFactory from '../factories/CompanyInputFactory.js';
 import CompanyCreateSanitizeData from '../utils/CompanyCreateSinetizeData.js';
 import CompanyFindByCnpjRepository from '../repositories/CompanyFindByCnpj.js';
+import { CompanyCreateSchema } from '../validators/schemas/CompanyCreateSchema.js';
 import Logger from '../../shared/utils/Logger.js';
 import {
   ERROR_COMPANY,
@@ -35,6 +36,14 @@ export default class CompanyCreateService {
    */
   async createCompany(companyData) {
     try {
+      // Valida o campo corporateReason antes de prosseguir
+      const validationError = CompanyCreateSchema(companyData.cnpj);
+      if (validationError !== true) {
+        return {
+          success: false,
+          message: validationError
+        };
+      }
       // Sanitizar os dados da empresa para garantir que apenas os campos permitidos sejam aceitos
       const sanitizedData = CompanyCreateSanitizeData(companyData);
 
