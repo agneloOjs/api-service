@@ -1,6 +1,7 @@
 import CompanyGetAllService from '../services/CompanyGetAll.js';
-import { ERROR_MESSAGES_BR } from '../I18n/pt-BR/message/ErrorMessagesBR.js';
+
 import Logger from '../../shared/utils/Logger.js';
+import { ERROR_MESSAGES_BR } from '../../shared/I18n/pt-BR/ErrorMessagesBR.js';
 
 /**
  * Classe de controle para gerenciar as requisições de obtenção de todas as empresas.
