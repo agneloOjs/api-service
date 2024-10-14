@@ -3,12 +3,14 @@
  * @module routes/public
  */
 import { Router } from 'express';
+import UserPublicRoutes from '../user-service/routes/UserPublic.routes.js';
 
 const publicRoutes = Router();
 
 /**
  * Rotas usuários
  */
+publicRoutes.use('/user-service', UserPublicRoutes);
 
 /**
  * Rotas de autenticação
