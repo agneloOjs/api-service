@@ -1,4 +1,4 @@
-import dbService from "../../config/dbService.js";
+import dbService from '../../config/dbService.js';
 
 export default class UserGetAllRepository {
   /**
@@ -8,6 +8,6 @@ export default class UserGetAllRepository {
    */
 
   async findAll(userData) {
-    return dbService.user.findMany({ data: userData })
+    return dbService.user.findMany({ data: userData });
   }
 }

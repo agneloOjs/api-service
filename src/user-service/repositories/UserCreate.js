@@ -6,8 +6,11 @@ export default class UserCreateRepository {
    * @returns {Promise<Object>}
    * @throws {Error}
    */
-
   async create(userData) {
-    return dbService.user.create({ data: userData });
+    try {
+      return await dbService.user.create({ data: userData });
+    } catch (error) {
+      throw new Error(`Error creating user: ${error.message}`);
+    }
   }
 }

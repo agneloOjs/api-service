@@ -25,6 +25,7 @@ export default class UserCreateController {
       }
     } catch (error) {
       Logger.error(error);
+      console.log(error)
       return res.status(500).json({ erro: 'Erro no servidor.' });
     }
   };

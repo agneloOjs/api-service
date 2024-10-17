@@ -11,6 +11,8 @@ export default class CompanyInputDTO {
    * @param {string} company.cnpj
    * @param {boolean} company.status
    * @param {boolean} company.blocked
+   * @param {string} company.createdBy
+   * @param {string} company.ownerId
    */
   constructor(company) {
     this.id = company.id;
@@ -18,5 +20,7 @@ export default class CompanyInputDTO {
     this.cnpj = company.cnpj;
     this.status = company.status;
     this.blocked = company.blocked;
+    this.createdBy = company.createdBy; 
+    this.ownerId = company.ownerId; 
   }
 }

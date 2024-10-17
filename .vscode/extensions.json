@@ -9,6 +9,8 @@
     "pkief.material-icon-theme",
     "ms-vscode-remote.remote-wsl",
     "irongeek.vscode-env",
-    "prisma.prisma-insider"
+    "prisma.prisma-insider",
+    "exceptionptr.vscode-prettier-eslint",
+    "esbenp.prettier-vscode"
   ]
 }
