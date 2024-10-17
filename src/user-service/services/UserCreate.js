@@ -12,7 +12,7 @@ export default class UserCreateService {
       const userCreated = await this.userCreateRepository.create({
         ...userData,
         active: true,
-        code: 123457
+        code: 123458
       });
 
       return {
