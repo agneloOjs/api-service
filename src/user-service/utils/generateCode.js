@@ -1,6 +1,10 @@
-import { UserFindByCode } from "../repositories/UserFindByCode.js";
+import { UserFindByCode } from '../repositories/UserFindByCode.js';
 
-export const generateCode = async (minCode = 100000, maxCode = 999999, maxAttempts = 10) => {
+export const userGenerateCode = async (
+  minCode = 100000,
+  maxCode = 999999,
+  maxAttempts = 10
+) => {
   const userByCode = new UserFindByCode();
   let uniqueCode;
   let codeExists = true;
@@ -12,20 +16,22 @@ export const generateCode = async (minCode = 100000, maxCode = 999999, maxAttemp
 
     try {
       // Verifica se o código já existe no banco de dados
-      const existingUser = await userByCode.findByCode(uniqueCode); 
+      const existingUser = await userByCode.findByCode(uniqueCode);
       codeExists = !!existingUser;
     } catch (error) {
       // Loga o erro e segue com a próxima tentativa
       console.error(`Erro ao verificar código ${uniqueCode}:`, error);
     }
 
-    attempts++; 
+    attempts++;
   }
 
   // Verifica se encontrou um código único
   if (codeExists) {
-    throw new Error(`Não foi possível gerar um código único após ${maxAttempts} tentativas.`);
+    throw new Error(
+      `Não foi possível gerar um código único após ${maxAttempts} tentativas.`
+    );
   }
 
-  return uniqueCode; 
+  return uniqueCode;
 };
