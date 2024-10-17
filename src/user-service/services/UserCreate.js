@@ -1,6 +1,8 @@
 import Logger from '../../shared/utils/Logger.js';
 import UserCreateRepository from '../repositories/UserCreate.js';
 import UserInputFactory from '../factories/UserInputFactory.js';
+import { encryptPassword } from '../../auth-service/utils/encryptPassword.js';
+import { generateCode } from '../utils/generateCode.js';
 
 export default class UserCreateService {
   constructor() {
@@ -8,11 +10,18 @@ export default class UserCreateService {
   }
 
   async createUser(userData) {
+    // Gera um código único
+    const userCode = await generateCode();
+
+    // Criptografa a senha antes de salvar no banco de dados
+    const hashedPassword = await encryptPassword(userData.password);
+
     try {
       const userCreated = await this.userCreateRepository.create({
         ...userData,
         active: true,
-        code: 123458
+        code: userCode,
+        password: hashedPassword
       });
 
       return {
