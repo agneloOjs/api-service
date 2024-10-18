@@ -1,7 +1,11 @@
-export const passwordVerify = async (password, hashedPassword) => {
+import bcrypt from 'bcrypt';
+
+export const passwordVerify = async (data, hash) => {
+  if (!data || !hash) {
+    throw new Error('data and hash arguments required');
+  }
   try {
-    const match = await bcrypt.compare(password, hashedPassword);
-    return match;
+    return await bcrypt.compare(data, hash);
   } catch (error) {
     throw new Error('Erro ao verificar a senha: ' + error.message);
   }
