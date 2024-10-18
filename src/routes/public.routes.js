@@ -4,6 +4,7 @@
  */
 import { Router } from 'express';
 import UserPublicRoutes from '../user-service/routes/UserPublic.routes.js';
+import authPublicRoutes from '../auth-service/routes/authPublic.routes.js';
 
 const publicRoutes = Router();
 
@@ -15,7 +16,9 @@ publicRoutes.use('/user-service', UserPublicRoutes);
 /**
  * Rotas de autenticação
  */
-
+/**
+ */
+publicRoutes.use('/', authPublicRoutes);
 /**
  * Rota de health check
  */
