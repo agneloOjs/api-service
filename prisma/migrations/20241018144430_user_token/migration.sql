@@ -14,5 +14,8 @@ CREATE TABLE "user_tokens" (
 -- CreateIndex
 CREATE UNIQUE INDEX "user_tokens_id_key" ON "user_tokens"("id");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "user_tokens_userId_key" ON "user_tokens"("userId");
+
 -- AddForeignKey
 ALTER TABLE "user_tokens" ADD CONSTRAINT "user_tokens_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
