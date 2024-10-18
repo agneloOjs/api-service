@@ -62,10 +62,24 @@ model User {
   failedLoginAttempts Int?      @default(0)
   lockoutTime         DateTime?
 
-  company   Company?  @relation("CompanyUsers", fields: [companyId], references: [id])
-  companyId String?   @db.Uuid
+  company   Company?    @relation("CompanyUsers", fields: [companyId], references: [id])
+  companyId String?     @db.Uuid
   Company   Company[]
+  UserToken UserToken[]
 
   @@index([email, code])
   @@map("users")
+}
+
+model UserToken {
+  id           String   @id @unique @default(uuid()) @db.Uuid
+  createdAt    DateTime @default(now())
+  expiresAt    DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String   @db.Uuid
+  accessToken  String
+  refreshToken String
+  deviceName   String
+
+  @@map("user_tokens")
 }
