@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { AuthLoginController } from '../controllers/AuthLogin.js';
+import AuthLoginController from '../controllers/AuthLogin.js';
 
 const authPublicRoutes = Router();
 const authLoginController = new AuthLoginController();
@@ -9,7 +9,7 @@ const authLoginController = new AuthLoginController();
  */
 authPublicRoutes.post(
   '/login',
-  authLoginController.login.bind(authLoginController) // Use a instância aqui
+  authLoginController.login.bind(AuthLoginController) // Use a instância aqui
 );
 
 export default authPublicRoutes;
