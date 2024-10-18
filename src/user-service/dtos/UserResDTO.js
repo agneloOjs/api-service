@@ -11,10 +11,10 @@ export default class UserResDTO {
 
   constructor(user) {
     this.id = user.id;
-    this.email = user.email
-    this.userName = user.userName
-    this.active = user.active
-    this.code = user.code
-    this.password = user.password
+    this.email = user.email;
+    this.userName = user.userName;
+    this.active = user.active;
+    this.code = user.code;
+    this.password = user.password;
   }
 }
