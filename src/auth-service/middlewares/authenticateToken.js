@@ -1,16 +1,25 @@
-import { authVerifyToken } from '../utils/authVerifyToken.js';
+import express from 'express';
+import { AuthVerifyToken } from '../utils/verifyToken.js';
+const app = express();
 
-export const authenticateToken = async (req, res, next) => {
-  const token = req.headers['authorization']?.split(' ')[1];
+/**
+ * Middleware para autenticação usando token JWT.
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
+export const authenticateUser = async (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
 
-  if (!token) return res.status(401).json({ message: 'Token não fornecido' });
+  if (!token) {
+    return res.status(401).json({ message: 'Token não fornecido.' });
+  }
 
   try {
-    // Usa a função authVerifyToken para verificar o token
-    const user = await authVerifyToken(token);
-    req.user = user;
+    const userId = await AuthVerifyToken(token);
+    req.userId = userId;
     next();
   } catch (error) {
-    return res.status(403).json({ message: 'Token inválido' });
+    res.status(401).json({ message: error.message });
   }
 };
