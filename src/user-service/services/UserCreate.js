@@ -1,7 +1,7 @@
 import Logger from '../../shared/utils/Logger.js';
 import UserCreateRepository from '../repositories/UserCreate.js';
 import UserInputFactory from '../factories/UserInputFactory.js';
-import { passwordEncrypt } from '../../auth-service/utils/passwordEncrypt.js';
+import { passwordEncrypt } from '../utils/passwordEncrypt.js';
 import { userGenerateCode } from '../utils/generateCode.js';
 
 export default class UserCreateService {
