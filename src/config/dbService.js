@@ -5,7 +5,7 @@ const dbService = new PrismaClient();
 /**
  * Função para conectar ao banco de dados.
  */
-export const conectDb = async () => {
+export const connectDb = async () => {
   try {
     await dbService.$connect();
     console.log("Conectado ao banco de dados.");
