@@ -4,11 +4,12 @@
 
     $ npm install
 
-# 2. **test**
+# 2. jshint
 
-    $ npm run test
+    $ npm run lint
 
-# vitest
+# 3. **test**
 
+    $ npm test
     $ npx vitest run --reporter verbose
     $ npx vitest
