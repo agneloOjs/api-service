@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "prisma.prisma",
+    "mgmcdermott.vscode-language-babel",
+    "dracula-theme.theme-dracula",
+    "xabikos.javascriptsnippets",
+    "ionutvmi.path-autocomplete",
+    "dbaeumer.vscode-eslint",
+    "pkief.material-icon-theme",
+    "ms-vscode-remote.remote-wsl",
+    "irongeek.vscode-env",
+    "prisma.prisma-insider",
+    "exceptionptr.vscode-prettier-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
