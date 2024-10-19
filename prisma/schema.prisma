@@ -12,3 +12,25 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model user {
+  id                  String    @id @unique @default(uuid()) @db.Uuid
+  createdAt           DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt           DateTime  @updatedAt @db.Timestamp(6)
+  email               String    @unique @db.VarChar(80)
+  userName            String    @db.VarChar(80)
+  active              Boolean   @default(false)
+  code                Int       @unique
+  password            String?   @db.VarChar(255)
+  resetPasswordToken  String?   @db.VarChar(255)
+  resetPasswordSentAt DateTime?
+  rememberCreateAt    DateTime?
+  lastPasswordUpdate  DateTime? @db.Timestamp(6)
+  passwordExpiration  DateTime? @db.Timestamp(6)
+  failedLoginAttempts Int?      @default(0)
+  lockoutTime         DateTime?
+  createdBy           String?   @unique @db.Uuid
+
+  @@index([email, code])
+  @@map("users")
+}
