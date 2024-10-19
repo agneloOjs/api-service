@@ -1,5 +1,5 @@
 import dbService, {
-  conectDb,
+  connectDb,
   desconectDb,
 } from "../../../../src/config/dbService.js";
 import { describe, it, expect, vi } from "vitest";
@@ -18,7 +18,7 @@ describe("Testando conexão com o banco de dados", () => {
   it("deve conectar ao banco de dados com sucesso", async () => {
     const connectSpy = vi.spyOn(dbService, "$connect").mockResolvedValueOnce();
 
-    await conectDb();
+    await connectDb();
 
     expect(connectSpy).toHaveBeenCalled();
     expect(connectSpy).toHaveBeenCalledTimes(1);
@@ -29,7 +29,7 @@ describe("Testando conexão com o banco de dados", () => {
       .spyOn(dbService, "$connect")
       .mockRejectedValueOnce(new Error("Falha na conexão"));
 
-    await expect(conectDb()).rejects.toThrow("Falha na conexão");
+    await expect(connectDb()).rejects.toThrow("Falha na conexão");
     expect(connectSpy).toHaveBeenCalled();
   });
 
