@@ -36,6 +36,7 @@
     "companyOnly": "Api",
     "dtos": "Controller",
     "factories": "Controller",
-    "repositories": "Controller"
+    "repositories": "Controller",
+    "pt-BR": "Custom"
   }
 }
