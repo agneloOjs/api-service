@@ -7,6 +7,7 @@ export default class UserInputDTO {
    * @param {string} user.password
    * @param {boolean} user.active
    * @param {int} user.code
+   * @param {string} createdBy
    *
    */
 
@@ -17,5 +18,6 @@ export default class UserInputDTO {
     this.password = user.password;
     this.active = user.active;
     this.code = user.code;
+    this.createdBy = user.createdBy;
   }
 }

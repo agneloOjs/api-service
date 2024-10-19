@@ -17,6 +17,7 @@ export default class UserCreateService {
     const hashedPassword = await passwordEncrypt(userData.password);
 
     try {
+      // Cria o usuário
       const userCreated = await this.userCreateRepository.create({
         ...userData,
         active: true,
@@ -24,12 +25,21 @@ export default class UserCreateService {
         password: hashedPassword
       });
 
+      // Atualiza o usuário recém-criado para incluir o createdBy
+      const userCreatedUpdate = await this.userCreateRepository.update(
+        userCreated.id,
+        {
+          createdBy: userCreated.id
+        }
+      );
+
       return {
         success: true,
         message: 'Usuário cadastrado com sucesso.',
-        user: UserInputFactory.userInputDTO(userCreated)
+        user: UserInputFactory.userInputDTO(userCreatedUpdate)
       };
     } catch (error) {
+      console.log(error);
       Logger.error(error);
       return {
         success: false,

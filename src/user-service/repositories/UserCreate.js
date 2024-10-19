@@ -13,4 +13,11 @@ export default class UserCreateRepository {
       throw new Error(`Error creating user: ${error.message}`);
     }
   }
+
+  async update(userId, data) {
+    return await dbService.user.update({
+      where: { id: userId },
+      data
+    });
+  }
 }

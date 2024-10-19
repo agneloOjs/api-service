@@ -31,6 +31,7 @@ export default class CompanyGetAllController {
       return res.status(200).json(companies);
     } catch (error) {
       Logger.error(error);
+      console.log(error);
       return res
         .status(500)
         .json({ message: `${ERROR_MESSAGES_BR.INTERNAL_SERVER_ERROR}` });

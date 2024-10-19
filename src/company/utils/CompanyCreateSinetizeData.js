@@ -1,5 +1,12 @@
 export default function CompanyCreateSanitizeData(data) {
-  const allowedFields = ['id', 'corporateReason', 'cnpj', 'status', 'blocked'];
+  const allowedFields = [
+    'id',
+    'corporateReason',
+    'cnpj',
+    'status',
+    'blocked',
+    'cratedBy'
+  ];
   const sanitizedCreateData = {};
 
   // Filtrar apenas os campos permitidos

@@ -61,6 +61,7 @@ model User {
   passwordExpiration  DateTime? @db.Timestamp(6)
   failedLoginAttempts Int?      @default(0)
   lockoutTime         DateTime?
+  createdBy           String?   @unique @db.Uuid
 
   company   Company?    @relation("CompanyUsers", fields: [companyId], references: [id]) // Relacionamento opcional com a entidade Company.
   companyId String?     @db.Uuid // Armazenada para o UUID da empresa.

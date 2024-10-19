@@ -11,7 +11,9 @@ const ACCESS_TOKEN_EXPIRATION = process.env.ACCESS_TOKEN_SECRET_EXPIRES_IN;
  * @returns {Promise<string>}
  */
 export const generateTokenAccess = (userId, deviceId, deviceType) => {
-  const expiresAt = new Date(Date.now() + parseInt(ACCESS_TOKEN_EXPIRATION));
+  const expiresAt = new Date(
+    Date.now() + parseInt(ACCESS_TOKEN_EXPIRATION) * 1000
+  );
 
   const payload = {
     userId,

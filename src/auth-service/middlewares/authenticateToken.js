@@ -16,8 +16,8 @@ export const authenticateUser = async (req, res, next) => {
   }
 
   try {
-    const userId = await AuthVerifyToken(token);
-    req.userId = userId;
+    const user = await AuthVerifyToken(token, user);
+    req.userId = user.id;
     next();
   } catch (error) {
     res.status(401).json({ message: error.message });
