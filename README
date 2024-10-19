@@ -6,7 +6,7 @@
 
 # 2. jshint
 
-    $ npm run lint
+    $ npx jshint src
 
 # 3. **test**
 
