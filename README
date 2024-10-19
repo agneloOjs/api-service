@@ -10,5 +10,5 @@
 
 # vitest
 
-$ npx vitest run --reporter verbose
-$ npx vitest
+    $ npx vitest run --reporter verbose
+    $ npx vitest
