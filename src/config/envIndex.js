@@ -1,6 +1,6 @@
 /**
  * Configurações de ambiente da aplicação
- * @module config/env
+ * @module config/envIndex
  */
 import "dotenv/config";
 
