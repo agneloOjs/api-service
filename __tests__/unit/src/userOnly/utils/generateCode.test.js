@@ -1,11 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { userGenerateCode } from '../../../../../../src/userOnly/utils/generateCode.js';
-import { UserfindUniqueRepository } from '../../../../../../src/userOnly/repositories/findRecords/findUnique.js';
+import { userGenerateCode } from '../../../../../src/userOnly/utils/generateCode.js';
+import { UserfindUniqueRepository } from '../../../../../src/userOnly/repositories/findRecords/findUnique.js';
 
 // Mock da classe UserfindUniqueRepository
-vi.mock(
-  '../../../../../../src/userOnly/repositories/findRecords/findUnique.js'
-);
+vi.mock('../../../../../src/userOnly/repositories/findRecords/findUnique.js');
 
 describe('userGenerateCode', () => {
   let mockFindByCode;
