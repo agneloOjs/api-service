@@ -6,8 +6,10 @@
   "globals": {
     "process": true,
     "describe": true,
-    "it": true,
     "beforeEach": true,
-    "afterEach": true
+    "afterEach": true,
+    "expect": false,
+    "vi": false,
+    "it": true
   }
 }
