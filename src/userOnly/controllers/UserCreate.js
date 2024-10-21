@@ -1,5 +1,6 @@
 import UserCreateService from '../services/UserCreate.js';
 import Logger from '../../shared/utils/Logger.js';
+import { ERROR_MESSAGES } from '../../shared/I18n/pt-BR/ErrorMessagesBR.js';
 
 export default class UserCreateController {
   constructor() {
@@ -26,7 +27,9 @@ export default class UserCreateController {
     } catch (error) {
       Logger.error(error);
       console.log(error);
-      return res.status(500).json({ erro: 'Erro no servidor.' });
+      return res
+        .status(500)
+        .json({ erro: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
   };
 }
