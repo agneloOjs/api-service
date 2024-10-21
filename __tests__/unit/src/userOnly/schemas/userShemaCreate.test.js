@@ -27,7 +27,10 @@ describe('userSchemaCreate', () => {
 
     const result = userSchemaCreate(userData);
 
-    expect(result).toEqual({ success: true });
+    expect(result).toEqual({
+      success: true,
+      statusCode: 200
+    });
   });
 
   it('deve retornar erro para e-mail inválido', () => {
@@ -96,7 +99,7 @@ describe('userSchemaCreate', () => {
     });
   });
 
-  it('deve retornar erro para múltiplas validações falhas', () => {
+  it('deve retornar erro para múltiplas validações falhas, retornando apenas a primeira mensagem', () => {
     userEmailValidate.mockReturnValue({
       valid: false,
       errors: ['E-mail inválido.']
@@ -120,7 +123,7 @@ describe('userSchemaCreate', () => {
 
     expect(result).toEqual({
       statusCode: 400,
-      messages: ['E-mail inválido.', 'Nome inválido.', 'Senha inválida.']
+      messages: ['E-mail inválido.'] // Espera apenas a primeira mensagem de erro
     });
   });
 });

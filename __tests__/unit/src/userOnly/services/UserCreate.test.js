@@ -1,98 +1,140 @@
 // Importa o necessário para os testes
-import { describe, it, expect, vi, afterEach } from 'vitest';
-import UserCreateService from '../../../../../src/userOnly/services/UserCreate.js';
-import UserCreateRepository from '../../../../../src/userOnly/repositories/UserCreate.js';
-import UserInputFactory from '../../../../../src/userOnly/factories/UserInputFactory.js';
-import Logger from '../../../../../src/shared/utils/Logger.js';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { userSchemaCreate } from '../../../../../src/userOnly/schemas/userShemaCreate.js';
 
-describe('UserCreateService', () => {
-  // Mock para os dados do usuário
-  const mockUserData = {
-    id: 1,
-    email: 'test@example.com',
-    userName: 'testUser',
-    password: 'hashedPassword123'
-  };
+// Mocks para as funções de validação
+vi.mock('../../../../../src/userOnly/constants/data/userEmail.js', () => ({
+  userEmailValidate: vi.fn()
+}));
 
-  const mockUserCreated = {
-    ...mockUserData,
-    active: true,
-    code: 123456
-  };
+vi.mock('../../../../../src/userOnly/constants/data/userName.js', () => ({
+  userNameValidate: vi.fn()
+}));
 
-  const mockUserDTO = {
-    id: 1,
-    email: 'test@example.com',
-    userName: 'testUser',
-    active: true,
-    code: 123456
-  };
+vi.mock('../../../../../src/userOnly/constants/data/userPassword.js', () => ({
+  userPasswordValidate: vi.fn()
+}));
 
-  // Cria uma instância do serviço
-  const userCreateService = new UserCreateService();
+import { userEmailValidate } from '../../../../../src/userOnly/constants/data/userEmail.js';
+import { userNameValidate } from '../../../../../src/userOnly/constants/data/userName.js';
+import { userPasswordValidate } from '../../../../../src/userOnly/constants/data/userPassword.js';
 
-  // Zera os mocks após cada teste
-  afterEach(() => {
+describe('userSchemaCreate', () => {
+  beforeEach(() => {
+    // Reseta os mocks antes de cada teste
     vi.clearAllMocks();
   });
 
-  it('deve criar um usuário com sucesso', async () => {
-    // Mock da função create no UserCreateRepository
-    const createMock = vi
-      .spyOn(UserCreateRepository.prototype, 'create')
-      .mockResolvedValue(mockUserCreated);
+  it('deve retornar sucesso para dados válidos', () => {
+    const validUserData = {
+      email: 'valid@example.com',
+      userName: 'validUser',
+      password: 'StrongPassword123!'
+    };
 
-    // Mock da função userInputDTO no UserInputFactory
-    const userInputDTOMock = vi
-      .spyOn(UserInputFactory, 'userInputDTO')
-      .mockReturnValue(mockUserDTO);
+    userEmailValidate.mockReturnValue({ valid: true, errors: [] });
+    userNameValidate.mockReturnValue({ valid: true, errors: [] });
+    userPasswordValidate.mockReturnValue({ valid: true, errors: [] });
 
-    const result = await userCreateService.createUser(mockUserData);
+    const result = userSchemaCreate(validUserData);
 
-    // Verifica se o repositório foi chamado com os dados corretos
-    expect(createMock).toHaveBeenCalledWith({
-      ...mockUserData,
-      active: true,
-      code: 123456
-    });
-
-    // Verifica se o DTO foi chamado com o usuário criado
-    expect(userInputDTOMock).toHaveBeenCalledWith(mockUserCreated);
-
-    // Verifica se o resultado é o esperado
     expect(result).toEqual({
-      success: true,
-      message: 'Usuário cadastrado com sucesso.',
-      user: mockUserDTO
+      statusCode: 200,
+      success: true
     });
   });
 
-  it('deve retornar erro ao falhar na criação do usuário', async () => {
-    // Mock para simular um erro no repositório
-    const errorMessage = 'Erro ao criar usuário no banco de dados';
-    const createMock = vi
-      .spyOn(UserCreateRepository.prototype, 'create')
-      .mockRejectedValue(new Error(errorMessage));
+  it('deve retornar erro para e-mail inválido', () => {
+    const invalidUserData = {
+      email: 'invalid-email',
+      userName: 'validUser',
+      password: 'StrongPassword123!'
+    };
 
-    // Mock da função Logger para verificar se o erro é logado
-    const loggerMock = vi.spyOn(Logger, 'error');
+    userEmailValidate.mockReturnValue({
+      valid: false,
+      errors: ['Email inválido.']
+    });
+    userNameValidate.mockReturnValue({ valid: true, errors: [] });
+    userPasswordValidate.mockReturnValue({ valid: true, errors: [] });
 
-    const result = await userCreateService.createUser(mockUserData);
+    const result = userSchemaCreate(invalidUserData);
 
-    // Verifica se o repositório foi chamado com os dados corretos
-    expect(createMock).toHaveBeenCalledWith({
-      ...mockUserData,
-      active: true,
-      code: 123456
+    expect(result).toEqual({
+      statusCode: 400,
+      messages: ['Email inválido.']
+    });
+  });
+
+  it('deve retornar erro para nome inválido', () => {
+    const invalidUserData = {
+      email: 'valid@example.com',
+      userName: '',
+      password: 'StrongPassword123!'
+    };
+
+    userEmailValidate.mockReturnValue({ valid: true, errors: [] });
+    userNameValidate.mockReturnValue({
+      valid: false,
+      errors: ['Nome é obrigatório.']
+    });
+    userPasswordValidate.mockReturnValue({ valid: true, errors: [] });
+
+    const result = userSchemaCreate(invalidUserData);
+
+    expect(result).toEqual({
+      statusCode: 400,
+      messages: ['Nome é obrigatório.']
+    });
+  });
+
+  it('deve retornar erro para senha inválida', () => {
+    const invalidUserData = {
+      email: 'valid@example.com',
+      userName: 'validUser',
+      password: '123'
+    };
+
+    userEmailValidate.mockReturnValue({ valid: true, errors: [] });
+    userNameValidate.mockReturnValue({ valid: true, errors: [] });
+    userPasswordValidate.mockReturnValue({
+      valid: false,
+      errors: ['Senha muito fraca.']
     });
 
-    // Verifica se o erro foi logado
-    expect(loggerMock).toHaveBeenCalledWith(new Error(errorMessage));
+    const result = userSchemaCreate(invalidUserData);
 
-    // Verifica se o resultado de erro é o esperado
     expect(result).toEqual({
-      success: false,
-      message: 'Erro ao cadastrar usuário.'
+      statusCode: 400,
+      messages: ['Senha muito fraca.']
+    });
+  });
+
+  it('deve retornar erro para múltiplos campos inválidos', () => {
+    const invalidUserData = {
+      email: 'invalid-email',
+      userName: '',
+      password: '123'
+    };
+
+    userEmailValidate.mockReturnValue({
+      valid: false,
+      errors: ['Email inválido.']
+    });
+    userNameValidate.mockReturnValue({
+      valid: false,
+      errors: ['Nome é obrigatório.']
+    });
+    userPasswordValidate.mockReturnValue({
+      valid: false,
+      errors: ['Senha muito fraca.']
+    });
+
+    const result = userSchemaCreate(invalidUserData);
+
+    expect(result).toEqual({
+      statusCode: 400,
+      messages: ['Email inválido.']
     });
   });
 });

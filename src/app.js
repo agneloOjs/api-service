@@ -5,9 +5,9 @@
 
 import express from 'express';
 import cors from 'cors';
-import { envIndex } from './config/envIndex.js';
+import { envMain } from './config/envMain.js';
 import mainRoutes from './routes/main.routes.js';
-import { ERROR_MESSAGES_BR } from './shared/I18n/pt-BR/ErrorMessagesBR.js';
+import { ERROR_MESSAGES } from './shared/I18n/pt-BR/ErrorMessagesBR.js';
 
 class App {
   constructor() {
@@ -22,13 +22,13 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(
       cors({
-        origin: envIndex.CORS_ORIGIN,
+        origin: envMain.CORS_ORIGIN,
         credentials: true
       })
     );
 
     //Logs de requisição.
-    if (envIndex.NODE_ENV !== 'production') {
+    if (envMain.NODE_ENV !== 'production') {
       this.app.use((req, res, next) => {
         console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
         next();
@@ -52,7 +52,7 @@ class App {
       console.error(err);
       res.status(err.status || 500).json({
         status: 'error',
-        message: err.message || `${ERROR_MESSAGES_BR.INTERNAL_SERVER_ERROR}`
+        message: err.message || `${ERROR_MESSAGES.INTERNAL_SERVER_ERROR}`
       });
       next();
     });

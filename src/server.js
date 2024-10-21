@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import app from './app.js';
 import { connectDb, desconectDb } from './config/dbService.js';
-import { ERROR_MESSAGES_BR } from './shared/I18n/pt-BR/ErrorMessagesBR.js';
+import { ERROR_MESSAGES } from './shared/I18n/pt-BR/ErrorMessagesBR.js';
 import Logger from './shared/utils/Logger.js';
 
 class Server {
@@ -32,7 +32,7 @@ class Server {
       });
     } catch (error) {
       Logger.error(error);
-      console.error(`${ERROR_MESSAGES_BR.ERROR_WHEN_STARTING_SERVER}`);
+      console.error(`${ERROR_MESSAGES.ERROR_WHEN_STARTING_SERVER}`);
       process.exit(1);
     }
   }
