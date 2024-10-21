@@ -3,16 +3,17 @@
  * @module app
  */
 
-import express from "express";
-import cors from "cors";
-import { envIndex } from "./config/envIndex.js";
-import { ERROR_MESSAGES_BR } from "./shared/I18n/pt-BR/ErrorMessagesBR.js";
+import express from 'express';
+import cors from 'cors';
+import { envIndex } from './config/envIndex.js';
+import mainRoutes from './routes/main.routes.js';
+import { ERROR_MESSAGES_BR } from './shared/I18n/pt-BR/ErrorMessagesBR.js';
 
 class App {
   constructor() {
     this.app = express();
     this.middlewares();
-    // this.routes();
+    this.routes();
   }
 
   middlewares() {
@@ -22,12 +23,12 @@ class App {
     this.app.use(
       cors({
         origin: envIndex.CORS_ORIGIN,
-        credentials: true,
-      }),
+        credentials: true
+      })
     );
 
     //Logs de requisição.
-    if (envIndex.NODE_ENV !== "production") {
+    if (envIndex.NODE_ENV !== 'production') {
       this.app.use((req, res, next) => {
         console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
         next();
@@ -36,13 +37,13 @@ class App {
   }
 
   routes() {
-    //  this.app.use("/api-service", routes);
+    this.app.use('/api-service', mainRoutes);
 
     // Tratamento para rotas não encontradas.
-    this.app.use("*", (req, res) => {
+    this.app.use('*', (req, res) => {
       res.status(404).json({
-        status: "error",
-        message: `Rota ${req.originalUrl} não encontrada.`,
+        status: 'error',
+        message: `Rota ${req.originalUrl} não encontrada.`
       });
     });
 
@@ -50,8 +51,8 @@ class App {
     this.app.use((err, req, res, next) => {
       console.error(err);
       res.status(err.status || 500).json({
-        status: "error",
-        message: ERROR_MESSAGES_BR.INTERNAL_SERVER_ERROR,
+        status: 'error',
+        message: err.message || `${ERROR_MESSAGES_BR.INTERNAL_SERVER_ERROR}`
       });
       next();
     });
