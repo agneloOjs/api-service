@@ -20,3 +20,8 @@ export const I18nUserModelBR = {
   lockoutTime: 'Tempo de bloqueio',
   createdBy: 'Criado por'
 };
+
+export const I18n_USER_MESSAGE = {
+  USER_CREATE_SUCCESS: 'Usuário cadastrado com sucesso.',
+  USER_CREATE_ERROR: 'Erro ao cadastrar usuário.'
+};
