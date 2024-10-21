@@ -2,6 +2,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import UserCreateController from '../../../../../src/userOnly/controllers/UserCreate.js';
 import UserCreateService from '../../../../../src/userOnly/services/UserCreate.js';
 import Logger from '../../../../../src/shared/utils/Logger.js';
+import { ERROR_MESSAGES } from '../../../../../src/shared/I18n/pt-BR/ErrorMessagesBR.js';
 
 describe('UserCreateController', () => {
   // Mock dos objetos req e res
@@ -96,6 +97,8 @@ describe('UserCreateController', () => {
 
     // Verifica se a resposta HTTP foi 500 e a mensagem de erro retornada
     expect(mockRes.status).toHaveBeenCalledWith(500);
-    expect(mockRes.json).toHaveBeenCalledWith({ erro: 'Erro no servidor.' });
+    expect(mockRes.json).toHaveBeenCalledWith({
+      erro: ERROR_MESSAGES.INTERNAL_SERVER_ERROR
+    });
   });
 });

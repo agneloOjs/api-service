@@ -1,5 +1,5 @@
 /**
- * Schema para validar a crição do user
+ * Schema para validar a criação do user
  */
 
 import { userEmailValidate } from '../constants/data/userEmail.js';
@@ -23,7 +23,7 @@ export function userSchemaCreate(userData) {
   }
 
   // Validação do nome
-  const nameValidation = userNameValidate(userData.name);
+  const nameValidation = userNameValidate(userData.userName);
   if (!nameValidation.valid) {
     errors.push(...nameValidation.errors);
     statusCode = 400;
@@ -40,11 +40,12 @@ export function userSchemaCreate(userData) {
   if (errors.length > 0) {
     return {
       statusCode,
-      messages: errors
+      messages: errors.slice(0, 1) // Retorna apenas a primeira mensagem de erro
     };
   }
 
   return {
-    success: true
+    success: true,
+    statusCode: 200
   };
 }
