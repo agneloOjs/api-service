@@ -3,6 +3,7 @@ import UserCreateRepository from '../repositories/UserCreate.js';
 import UserInputFactory from '../factories/UserInputFactory.js';
 import { userSchemaCreate } from '../schemas/userShemaCreate.js';
 import { I18n_USER_MESSAGE } from '../I18n/pt-BR/UserModel.js';
+import { userGenerateCode } from '../utils/generateCode.js';
 
 export default class UserCreateService {
   constructor() {
@@ -22,11 +23,14 @@ export default class UserCreateService {
     }
 
     try {
+      // Gera um código único
+      const userCode = await userGenerateCode();
+
       // Cria o usuário
       const userCreated = await this.userCreateRepository.create({
         ...userData,
         active: true,
-        code: 123458
+        code: userCode
       });
 
       return {

@@ -1,140 +1,121 @@
-// Importa o necessário para os testes
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import UserCreateService from '../../../../../src/userOnly/services/UserCreate.js';
+import UserCreateRepository from '../../../../../src/userOnly/repositories/UserCreate.js';
 import { userSchemaCreate } from '../../../../../src/userOnly/schemas/userShemaCreate.js';
+import { userGenerateCode } from '../../../../../src/userOnly/utils/generateCode.js';
+import { I18n_USER_MESSAGE } from '../../../../../src/userOnly/I18n/pt-BR/UserModel.js';
+import Logger from '../../../../../src/shared/utils/Logger.js';
 
-// Mocks para as funções de validação
-vi.mock('../../../../../src/userOnly/constants/data/userEmail.js', () => ({
-  userEmailValidate: vi.fn()
-}));
+// Mocks
+vi.mock('../../../../../src/userOnly/repositories/UserCreate.js');
+vi.mock('../../../../../src/userOnly/utils/generateCode.js');
+vi.mock('../../../../../src/userOnly/schemas/userShemaCreate.js');
+vi.mock('../../../../../src/shared/utils/Logger.js');
 
-vi.mock('../../../../../src/userOnly/constants/data/userName.js', () => ({
-  userNameValidate: vi.fn()
-}));
+describe('UserCreateService', () => {
+  let userCreateService;
+  const mockUserData = {
+    userName: 'John Doe',
+    email: 'john.doe@example.com',
+    password: 'securePassword123'
+  };
 
-vi.mock('../../../../../src/userOnly/constants/data/userPassword.js', () => ({
-  userPasswordValidate: vi.fn()
-}));
-
-import { userEmailValidate } from '../../../../../src/userOnly/constants/data/userEmail.js';
-import { userNameValidate } from '../../../../../src/userOnly/constants/data/userName.js';
-import { userPasswordValidate } from '../../../../../src/userOnly/constants/data/userPassword.js';
-
-describe('userSchemaCreate', () => {
   beforeEach(() => {
-    // Reseta os mocks antes de cada teste
+    userCreateService = new UserCreateService();
     vi.clearAllMocks();
   });
 
-  it('deve retornar sucesso para dados válidos', () => {
-    const validUserData = {
-      email: 'valid@example.com',
-      userName: 'validUser',
-      password: 'StrongPassword123!'
-    };
+  it('deve criar um usuário com sucesso', async () => {
+    const userCode = '123456';
+    userGenerateCode.mockResolvedValue(userCode);
+    userSchemaCreate.mockReturnValue({ statusCode: 200 });
+    UserCreateRepository.prototype.create.mockResolvedValue(mockUserData);
 
-    userEmailValidate.mockReturnValue({ valid: true, errors: [] });
-    userNameValidate.mockReturnValue({ valid: true, errors: [] });
-    userPasswordValidate.mockReturnValue({ valid: true, errors: [] });
-
-    const result = userSchemaCreate(validUserData);
+    const result = await userCreateService.createUser(mockUserData);
 
     expect(result).toEqual({
-      statusCode: 200,
-      success: true
+      success: true,
+      message: I18n_USER_MESSAGE.USER_CREATE_SUCCESS,
+      user: mockUserData // Assegure-se de que o formato do retorno está correto
+    });
+    expect(UserCreateRepository.prototype.create).toHaveBeenCalledWith({
+      ...mockUserData,
+      active: true,
+      code: userCode
     });
   });
 
-  it('deve retornar erro para e-mail inválido', () => {
-    const invalidUserData = {
-      email: 'invalid-email',
-      userName: 'validUser',
-      password: 'StrongPassword123!'
-    };
-
-    userEmailValidate.mockReturnValue({
-      valid: false,
-      errors: ['Email inválido.']
+  it('deve retornar mensagem de erro de validação se a validação falhar', async () => {
+    userSchemaCreate.mockReturnValue({
+      statusCode: 400,
+      messages: ['Dados do usuário inválidos']
     });
-    userNameValidate.mockReturnValue({ valid: true, errors: [] });
-    userPasswordValidate.mockReturnValue({ valid: true, errors: [] });
 
-    const result = userSchemaCreate(invalidUserData);
+    const result = await userCreateService.createUser(mockUserData);
 
     expect(result).toEqual({
-      statusCode: 400,
-      messages: ['Email inválido.']
+      success: false,
+      message: 'Dados do usuário inválidos'
     });
+    expect(UserCreateRepository.prototype.create).not.toHaveBeenCalled();
   });
 
-  it('deve retornar erro para nome inválido', () => {
-    const invalidUserData = {
-      email: 'valid@example.com',
-      userName: '',
-      password: 'StrongPassword123!'
-    };
+  it('deve retornar mensagem de erro se a geração do código do usuário falhar', async () => {
+    userSchemaCreate.mockReturnValue({ statusCode: 200 });
+    userGenerateCode.mockRejectedValue(new Error('Erro na geração do código'));
 
-    userEmailValidate.mockReturnValue({ valid: true, errors: [] });
-    userNameValidate.mockReturnValue({
-      valid: false,
-      errors: ['Nome é obrigatório.']
-    });
-    userPasswordValidate.mockReturnValue({ valid: true, errors: [] });
-
-    const result = userSchemaCreate(invalidUserData);
+    const result = await userCreateService.createUser(mockUserData);
 
     expect(result).toEqual({
-      statusCode: 400,
-      messages: ['Nome é obrigatório.']
+      success: false,
+      message: I18n_USER_MESSAGE.USER_CREATE_ERROR
     });
+    expect(UserCreateRepository.prototype.create).not.toHaveBeenCalled();
   });
 
-  it('deve retornar erro para senha inválida', () => {
-    const invalidUserData = {
-      email: 'valid@example.com',
-      userName: 'validUser',
-      password: '123'
-    };
+  it('deve retornar mensagem de erro se a criação do usuário falhar', async () => {
+    const errorMessage = 'Erro na geração do código';
+    userGenerateCode.mockResolvedValue('123456');
+    userSchemaCreate.mockReturnValue({ statusCode: 200 });
+    UserCreateRepository.prototype.create.mockRejectedValue(
+      new Error(errorMessage)
+    );
 
-    userEmailValidate.mockReturnValue({ valid: true, errors: [] });
-    userNameValidate.mockReturnValue({ valid: true, errors: [] });
-    userPasswordValidate.mockReturnValue({
-      valid: false,
-      errors: ['Senha muito fraca.']
-    });
-
-    const result = userSchemaCreate(invalidUserData);
+    const result = await userCreateService.createUser(mockUserData);
 
     expect(result).toEqual({
-      statusCode: 400,
-      messages: ['Senha muito fraca.']
+      success: false,
+      message: I18n_USER_MESSAGE.USER_CREATE_ERROR
     });
+    expect(Logger.error).toHaveBeenCalledWith(expect.any(Error)); // Verifica se o logger registrou o erro
   });
 
-  it('deve retornar erro para múltiplos campos inválidos', () => {
-    const invalidUserData = {
-      email: 'invalid-email',
-      userName: '',
-      password: '123'
-    };
+  it('deve registrar o erro quando a criação do usuário falha', async () => {
+    const errorMessage = 'Erro no banco de dados';
+    userGenerateCode.mockResolvedValue('123456');
+    userSchemaCreate.mockReturnValue({ statusCode: 200 });
+    UserCreateRepository.prototype.create.mockRejectedValue(
+      new Error(errorMessage)
+    );
 
-    userEmailValidate.mockReturnValue({
-      valid: false,
-      errors: ['Email inválido.']
-    });
-    userNameValidate.mockReturnValue({
-      valid: false,
-      errors: ['Nome é obrigatório.']
-    });
-    userPasswordValidate.mockReturnValue({
-      valid: false,
-      errors: ['Senha muito fraca.']
+    await userCreateService.createUser(mockUserData);
+
+    expect(Logger.error).toHaveBeenCalled(); // Verifica se o Logger foi chamado
+  });
+
+  it('deve tratar o caso de dados do usuário vazios', async () => {
+    const emptyUserData = {};
+    userSchemaCreate.mockReturnValue({
+      statusCode: 400,
+      messages: ['Os dados do usuário não podem estar vazios']
     });
 
-    const result = userSchemaCreate(invalidUserData);
+    const result = await userCreateService.createUser(emptyUserData);
 
     expect(result).toEqual({
-      statusCode: 400,
-      messages: ['Email inválido.']
+      success: false,
+      message: 'Os dados do usuário não podem estar vazios'
     });
+    expect(UserCreateRepository.prototype.create).not.toHaveBeenCalled();
   });
 });
