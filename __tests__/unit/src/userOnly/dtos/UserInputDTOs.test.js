@@ -1,5 +1,5 @@
-import UserInputDTO from '../../../../../src/userOnly/dtos/UserInputDTOs.js';
 import { describe, it, expect } from 'vitest';
+import UserInputDTO from '../../../../../src/userOnly/dtos/UserInputDTO.js';
 
 describe('UserInputDTO', () => {
   it('deve inicializar corretamente as propriedades do usuário', () => {
