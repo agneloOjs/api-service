@@ -37,6 +37,7 @@
     "dtos": "Controller",
     "factories": "Controller",
     "repositories": "Controller",
+    "findRecords": "Content",
     "pt-BR": "Custom"
   }
 }

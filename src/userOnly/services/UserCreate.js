@@ -4,6 +4,7 @@ import UserInputFactory from '../factories/UserInputFactory.js';
 import { userSchemaCreate } from '../schemas/userShemaCreate.js';
 import { I18n_USER_MESSAGE } from '../I18n/pt-BR/UserModel.js';
 import { userGenerateCode } from '../utils/generateCode.js';
+import { passwordEncrypt } from '../utils/passwordEncrypt.js';
 
 export default class UserCreateService {
   constructor() {
@@ -22,6 +23,9 @@ export default class UserCreateService {
       };
     }
 
+    // Criptografa a senha antes de salvar no banco de dados
+    const hashedPassword = await passwordEncrypt(userData.password);
+
     try {
       // Gera um código único
       const userCode = await userGenerateCode();
@@ -30,7 +34,8 @@ export default class UserCreateService {
       const userCreated = await this.userCreateRepository.create({
         ...userData,
         active: true,
-        code: userCode
+        code: userCode,
+        password: hashedPassword
       });
 
       return {
