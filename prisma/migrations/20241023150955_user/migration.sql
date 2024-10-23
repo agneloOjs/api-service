@@ -4,6 +4,7 @@ CREATE TABLE "users" (
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(6) NOT NULL,
     "email" VARCHAR(80) NOT NULL,
+    "phoneNumber" VARCHAR(15) NOT NULL,
     "userName" VARCHAR(80) NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT false,
     "code" INTEGER NOT NULL,
@@ -27,10 +28,13 @@ CREATE UNIQUE INDEX "users_id_key" ON "users"("id");
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "users_phoneNumber_key" ON "users"("phoneNumber");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "users_code_key" ON "users"("code");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_createdBy_key" ON "users"("createdBy");
 
 -- CreateIndex
-CREATE INDEX "users_email_code_idx" ON "users"("email", "code");
+CREATE INDEX "users_email_code_phoneNumber_idx" ON "users"("email", "code", "phoneNumber");

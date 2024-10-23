@@ -18,6 +18,7 @@ model user {
   createdAt           DateTime  @default(now()) @db.Timestamp(6)
   updatedAt           DateTime  @updatedAt @db.Timestamp(6)
   email               String    @unique @db.VarChar(80)
+  phoneNumber         String    @unique @db.VarChar(15)
   userName            String    @db.VarChar(80)
   active              Boolean   @default(false)
   code                Int       @unique
@@ -31,6 +32,6 @@ model user {
   lockoutTime         DateTime?
   createdBy           String?   @unique @db.Uuid
 
-  @@index([email, code])
+  @@index([email, code, phoneNumber])
   @@map("users")
 }
