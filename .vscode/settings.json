@@ -33,6 +33,7 @@
 
   "material-icon-theme.folders.associations": {
     "userOnly": "Api",
+    "authOnly": "Api",
     "companyOnly": "Api",
     "dtos": "Controller",
     "factories": "Controller",
