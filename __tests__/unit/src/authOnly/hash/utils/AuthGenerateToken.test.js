@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { AuthGenerateToken } from '../../../../../../src/authOnly/hash/utils/AuthGenerateToken.js';
 import { envConfig } from '../../../../../../src/config/envConfig.js';
-import { I18n_USER_TOKEN_MESSAGE } from '../../../../../../src/authOnly/hash/I18n/pt-BR/UserTokenModel.js';
+import { I18n_USER_TOKEN_MESSAGE } from '../../../../../../src/authOnly/I18n/pt-BR/UserTokenModel.js';
 import jwt from 'jsonwebtoken';
 
 // Mock do jwt.sign e jwt.verify

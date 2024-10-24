@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import Logger from '../../../shared/utils/Logger.js';
-import { I18n_USER_TOKEN_MESSAGE } from '../I18n/pt-BR/UserTokenModel.js';
+import { I18n_USER_TOKEN_MESSAGE } from '../../I18n/pt-BR/UserTokenModel.js';
 
 /**
  * Compara a senha fornecida com a senha criptografada.

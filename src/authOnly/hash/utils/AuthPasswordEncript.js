@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { envConfig } from '../../../config/envConfig.js';
-import { I18n_USER_TOKEN_MESSAGE } from '../I18n/pt-BR/UserTokenModel.js';
+import { I18n_USER_TOKEN_MESSAGE } from '../../I18n/pt-BR/UserTokenModel.js';
 
 export const AuthPasswordEncript = {
   /**
