@@ -4,7 +4,7 @@ CREATE TABLE "users" (
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(6) NOT NULL,
     "email" VARCHAR(80) NOT NULL,
-    "phoneNumber" VARCHAR(15) NOT NULL,
+    "phoneNumber" VARCHAR(20) NOT NULL,
     "userName" VARCHAR(80) NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT false,
     "code" INTEGER NOT NULL,

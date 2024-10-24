@@ -12,7 +12,7 @@ model user {
   createdAt           DateTime        @default(now()) @db.Timestamp(6)
   updatedAt           DateTime        @updatedAt @db.Timestamp(6)
   email               String          @unique @db.VarChar(80)
-  phoneNumber         String          @unique @db.VarChar(15)
+  phoneNumber         String          @unique @db.VarChar(20)
   userName            String          @db.VarChar(80)
   active              Boolean         @default(false)
   code                Int             @unique
@@ -26,7 +26,7 @@ model user {
   lockoutTime         DateTime?
   createdBy           String?         @unique @db.Uuid
   UserTokenCode       UserTokenCode[] // Relacionamento de um para muitos com várias UserTokenCode.
-  UserTokenAuth       UserTokenAuth[] // Relacionamento de um para muitos com várias UserTokenAuth.
+  UserTokenAuth       UserToken[] // Relacionamento de um para muitos com várias UserTokenAuth.
 
   @@index([email, code, phoneNumber])
   @@map("users")
@@ -45,13 +45,13 @@ model UserTokenCode {
   @@map("user_token_codes")
 }
 
-model UserTokenAuth {
+model UserToken {
   id           String   @id @unique @default(uuid()) @db.Uuid
   createdAt    DateTime @default(now())
   expiresAt    DateTime
   userId       String   @unique @db.Uuid
-  accessToken  String?  @unique @db.Uuid
-  refreshToken String?  @unique @db.Uuid
+  accessToken  String?  @unique
+  refreshToken String?  @unique
   revoked      Boolean  @default(false)
   ipAddress    String?  @db.VarChar(45)
   deviceId     String?  @db.VarChar(255)
