@@ -2,17 +2,17 @@
  * @module routes/authPublicRoutes
  */
 import { Router } from 'express';
-import { AuthTwilioController } from '../twilio/controllers/AuthTwilio.js';
+import { AuthUserController } from '../hash/controllers/AuthUserLogin.js';
 
 const authPublicRoutes = Router();
 
 // Instancia a classe do controller
-const uthTwilioController = new AuthTwilioController();
+const authUserController = new AuthUserController();
 
 // Autenticação usando Twilio para verificação por SMS
 authPublicRoutes.post(
   '/login',
-  uthTwilioController.sendVerificationCode.bind(uthTwilioController)
+  authUserController.login.bind(authUserController)
 );
 
 export default authPublicRoutes;
