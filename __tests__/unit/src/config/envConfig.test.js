@@ -13,6 +13,7 @@ describe('Configurações de ambiente', () => {
     process.env.CORS_ORIGIN;
     process.env.RATE_LIMIT_WINDOW_MS;
     process.env.RATE_LIMIT_MAX_REQUESTS;
+    process.env.SALT_ROUNDS_PASSWORD;
   });
 
   afterAll(() => {
@@ -26,6 +27,7 @@ describe('Configurações de ambiente', () => {
     process.env.CORS_ORIGIN;
     process.env.RATE_LIMIT_WINDOW_MS;
     process.env.RATE_LIMIT_MAX_REQUESTS;
+    process.env.SALT_ROUNDS_PASSWORD;
   });
 
   it('deve retornar o ambiente correto', () => {
@@ -44,6 +46,7 @@ describe('Configurações de ambiente', () => {
     expect(envConfig.JWT.ACCESS_SECRET).toBe(process.env.JWT_SECRET);
     expect(envConfig.JWT.ACCESS_EXPIRES_IN).toBe('15m');
     expect(envConfig.JWT.REFRESH_EXPIRES_IN).toBe('5h');
+    expect(envConfig.JWT.SALT_ROUNDS).toBe('12');
   });
 
   it('deve retornar as configurações de CORS corretas', () => {
