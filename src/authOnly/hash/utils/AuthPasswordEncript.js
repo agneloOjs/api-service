@@ -17,7 +17,7 @@ export const AuthPasswordEncript = {
       throw new Error(`${I18n_USER_TOKEN_MESSAGE.PASSWORD_INVALID}`);
     }
 
-    return bcrypt.hash(password, Number(envConfig.JWT.SALT_ROUNDS)); // Converta para número
+    return bcrypt.hash(password, Number(envConfig.JWT.SALT_ROUNDS));
   },
 
   /**
