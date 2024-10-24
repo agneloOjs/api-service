@@ -26,7 +26,8 @@ export const envConfig = {
   JWT: {
     ACCESS_SECRET: process.env.JWT_SECRET,
     ACCESS_EXPIRES_IN: process.env.JWT_SECRET_EXPIRES_IN,
-    REFRESH_EXPIRES_IN: process.env.REFRESH_JWT_SECRET_EXPIRES_IN
+    REFRESH_EXPIRES_IN: process.env.REFRESH_JWT_SECRET_EXPIRES_IN,
+    SALT_ROUNDS: process.env.SALT_ROUNDS_PASSWORD
   },
 
   /**

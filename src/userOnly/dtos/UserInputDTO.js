@@ -3,6 +3,7 @@ export default class UserInputDTO {
     this.id = user.id;
     this.createdAt = user.createdAt;
     this.email = user.email;
+    this.phoneNumber = user.phoneNumber;
     this.userName = user.userName;
     this.active = user.active;
     this.code = user.code;

@@ -5,7 +5,7 @@
 
 import express from 'express';
 import cors from 'cors';
-import { envMain } from './config/envMain.js';
+import { envConfig } from './config/envConfig.js';
 import mainRoutes from './routes/main.routes.js';
 import { ERROR_MESSAGES } from './shared/I18n/pt-BR/ErrorMessagesBR.js';
 
@@ -22,13 +22,13 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(
       cors({
-        origin: envMain.CORS_ORIGIN,
+        origin: envConfig.CORS_ORIGIN,
         credentials: true
       })
     );
 
     //Logs de requisição.
-    if (envMain.NODE_ENV !== 'production') {
+    if (envConfig.NODE_ENV !== 'production') {
       this.app.use((req, res, next) => {
         console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
         next();
